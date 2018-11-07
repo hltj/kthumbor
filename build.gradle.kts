@@ -4,11 +4,18 @@ plugins {
     kotlin("jvm") version "1.3.0"
 }
 
-group = "me.hltj"
-version = "1.0-SNAPSHOT"
+subprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+}
 
-repositories {
-    mavenCentral()
+allprojects {
+    group = "me.hltj"
+    version = "1.0-SNAPSHOT"
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
 }
 
 dependencies {
