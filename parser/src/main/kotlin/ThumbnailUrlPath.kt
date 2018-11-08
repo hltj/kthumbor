@@ -20,4 +20,18 @@ fun String.toThumbnailUrlPath(): ThumbnailUrlPath? {
     }
 }
 
-internal fun String.splitFromEnd(delimiter: Char, limit: Int = length): List<String> = TODO("not implemented")
+internal fun String.splitFromEnd(delimiter: Char, limit: Int = length): List<String> {
+    val list = mutableListOf(this)
+
+    (1..minOf(limit, length)).forEach { _ ->
+        val first = list.first()
+        val index = first.lastIndexOf(delimiter)
+        if (index < 0) return list
+
+        val left = first.substring(0, index)
+        list[0] = first.substring(index + 1)
+        list.add(0, left)
+    }
+
+    return list
+}
