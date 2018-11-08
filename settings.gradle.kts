@@ -1,3 +1,3 @@
 rootProject.name = "kthumbor"
 
-include("generator", "parser")
+include("share", "generator", "parser")
