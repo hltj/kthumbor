@@ -1,7 +1,7 @@
 package me.hltj.kthumbor.test
 
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import io.kotlintest.*
+import io.kotlintest.specs.*
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
@@ -17,13 +17,20 @@ class ServerTest : StringSpec({
         }
     }
 
-    "200 favicon" {
+    "200 static" {
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/favicon.ico").response) {
                 status() shouldBe HttpStatusCode.OK
-                byteContent shouldBe this::class.java.getResource("/static/favicon.ico").readBytes()
+                byteContent shouldBe staticResourceOf("/favicon.ico").readBytes()
+            }
+
+            with(handleRequest(HttpMethod.Get, "/oss.png").response) {
+                status() shouldBe HttpStatusCode.OK
+                byteContent shouldBe staticResourceOf("/oss.png").readBytes()
             }
         }
-
     }
 })
+
+private fun TestContext.staticResourceOf(relativePath: String) =
+    this::class.java.getResource("/static$relativePath")
