@@ -11,4 +11,10 @@ data class ThumbnailInput(
 /**
  * parse a URL path string ([this]) to [ThumbnailInput] or `null` if failed
  */
-fun String.toThumbnailInput(): ThumbnailInput? = TODO("not implemented")
+fun String.toThumbnailInput(): ThumbnailInput? = toThumbnailUrlPath()?.let {
+    ThumbnailInput(
+        originPath = it.originPath,
+        parameter = it.parameter.toThumbnailParameter() ?: return null,
+        format = it.suffix.toThumbnailFormat() ?: return null
+    )
+}
