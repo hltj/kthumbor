@@ -1,6 +1,6 @@
 package me.hltj.kthumbor.parser
 
-data class ThumbnailUrlPath(
+internal data class ThumbnailUrlPath(
     val originPath: String,
     val parameter: String,
     val suffix: String
@@ -11,7 +11,7 @@ data class ThumbnailUrlPath(
  * e.g.:
  * `"/path/to/image.suffix0.param.suffix"` to `ThumbnailUrlPath("/path/to/image.suffix0", "param", "suffix")`
  */
-fun String.toThumbnailUrlPath(): ThumbnailUrlPath? {
+internal fun String.toThumbnailUrlPath(): ThumbnailUrlPath? {
     val list = splitFromEnd('.', 2)
     return if (list.size != 3 || list.any { it.isEmpty() }) {
         null

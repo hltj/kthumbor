@@ -5,7 +5,7 @@ import me.hltj.kthumbor.share.ThumbnailParameter
 /**
  * parse a string ([this]) into [ThumbnailParameter] or `null` if failed
  */
-fun String.toThumbnailParameter(): ThumbnailParameter? {
+internal fun String.toThumbnailParameter(): ThumbnailParameter? {
     val groups = paramRegex.matchEntire(this)?.groups ?: return null
 
     val width = groups["width"]?.value?.toIntOrNull() ?: 0
