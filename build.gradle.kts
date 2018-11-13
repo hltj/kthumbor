@@ -30,6 +30,7 @@ val ktorVersion = "1.0.0-beta-3"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
+    implementation(project(":parser"))
     implementation(kotlin("stdlib-jdk8"))
     implementation(ktor("server-cio"))
     implementation(ktor("client-cio"))
