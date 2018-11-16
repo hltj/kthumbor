@@ -33,4 +33,4 @@ class ServerTest : StringSpec({
 })
 
 internal fun TestContext.staticResourceOf(relativePath: String) =
-    this::class.java.getResource("/static$relativePath")
+    this::class.java.getResource("/static-test$relativePath")
