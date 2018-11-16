@@ -31,6 +31,7 @@ fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
     implementation(project(":parser"))
+    implementation(project(":generator"))
     implementation(kotlin("stdlib-jdk8"))
     implementation(ktor("server-cio"))
     implementation(ktor("client-cio"))

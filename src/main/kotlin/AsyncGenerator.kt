@@ -1,8 +1,11 @@
 package me.hltj.kthumbor
 
+import me.hltj.kthumbor.generator.times
 import me.hltj.kthumbor.parser.toThumbnailInput
 import me.hltj.kthumbor.share.AsyncThumbnailInput
 import java.awt.image.BufferedImage
+import java.io.OutputStream
+import javax.imageio.ImageIO
 
 sealed class ThumbnailResult<out T> {
     data class Success<T>(val value: T) : ThumbnailResult<T>()
@@ -30,3 +33,10 @@ suspend infix fun String.fetchWith(
         )
     )
 } ?: ThumbnailResult.BadInput
+
+/**
+ * append thumbnail specified by [AsyncThumbnailInput]
+ */
+operator fun OutputStream.plusAssign(input: AsyncThumbnailInput) {
+    ImageIO.write(input.image * input.parameter, input.format, this)
+}
