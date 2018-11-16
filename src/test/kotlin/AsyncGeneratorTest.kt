@@ -6,7 +6,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import me.hltj.kthumbor.ThumbnailResult
+import me.hltj.kthumbor.KthumborResult
 import me.hltj.kthumbor.fetchWith
 import me.hltj.kthumbor.share.AsyncThumbnailInput
 import me.hltj.kthumbor.share.ThumbnailParameter
@@ -18,10 +18,10 @@ class AsyncThumbnailInputTest : StringSpec({
         runBlocking {
             with(("/oss.png.30x20.jpg" fetchWith ::staticResourceFetcher)) {
                 should {
-                    it is ThumbnailResult.Success<AsyncThumbnailInput>
+                    it is KthumborResult.Success<AsyncThumbnailInput>
                 }
 
-                with((this as ThumbnailResult.Success<AsyncThumbnailInput>).value) {
+                with((this as KthumborResult.Success<AsyncThumbnailInput>).value) {
                     image should {  it equalsTo staticResourceImageOf("/oss.png") }
                     parameter shouldBe ThumbnailParameter(30, 20)
                     format shouldBe "jpeg"
@@ -32,30 +32,30 @@ class AsyncThumbnailInputTest : StringSpec({
 
     "/oss.png.0x40.png => BadInput" {
         runBlocking {
-            ("/oss.png.0x40.png" fetchWith ::staticResourceFetcher) shouldBe ThumbnailResult.BadInput
+            ("/oss.png.0x40.png" fetchWith ::staticResourceFetcher) shouldBe KthumborResult.BadInput
         }
     }
 
     "BadInput => BadInput" {
         runBlocking {
-            ("/text.txt.80x80.png" fetchWith { ThumbnailResult.BadInput }) shouldBe ThumbnailResult.BadInput
+            ("/text.txt.80x80.png" fetchWith { KthumborResult.BadInput }) shouldBe KthumborResult.BadInput
         }
     }
 
     "NotFound => NotFound" {
         runBlocking {
-            ("no-such-image.80x80.png" fetchWith { ThumbnailResult.NotFound }) shouldBe ThumbnailResult.NotFound
+            ("no-such-image.80x80.png" fetchWith { KthumborResult.NotFound }) shouldBe KthumborResult.NotFound
         }
     }
 
     "Failure => Failure" {
         runBlocking {
-            with(("/whatever.80x80.png" fetchWith { ThumbnailResult.Failure(Exception("blah, blah")) })) {
+            with(("/whatever.80x80.png" fetchWith { KthumborResult.Failure(Exception("blah, blah")) })) {
                 should {
-                    it is ThumbnailResult.Failure
+                    it is KthumborResult.Failure
                 }
 
-                with((this as ThumbnailResult.Failure)) {
+                with((this as KthumborResult.Failure)) {
                     exception.message shouldBe "blah, blah"
                 }
             }
@@ -63,9 +63,9 @@ class AsyncThumbnailInputTest : StringSpec({
     }
 })
 
-internal suspend fun TestContext.staticResourceFetcher(originPath: String): ThumbnailResult<BufferedImage> {
+internal suspend fun TestContext.staticResourceFetcher(originPath: String): KthumborResult<BufferedImage> {
     delay(0L)
-    return ThumbnailResult.Success(staticResourceImageOf(originPath))
+    return KthumborResult.Success(staticResourceImageOf(originPath))
 }
 
 internal fun TestContext.staticResourceImageOf(originPath: String): BufferedImage = ImageIO.read(staticResourceOf(originPath))

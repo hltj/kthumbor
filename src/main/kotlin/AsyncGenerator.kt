@@ -7,32 +7,32 @@ import java.awt.image.BufferedImage
 import java.io.OutputStream
 import javax.imageio.ImageIO
 
-sealed class ThumbnailResult<out T> {
-    data class Success<T>(val value: T) : ThumbnailResult<T>()
-    data class Failure(val exception: Exception) : ThumbnailResult<Nothing>()
-    object NotFound : ThumbnailResult<Nothing>()
-    object BadInput : ThumbnailResult<Nothing>()
+sealed class KthumborResult<out T> {
+    data class Success<T>(val value: T) : KthumborResult<T>()
+    data class Failure(val exception: Exception) : KthumborResult<Nothing>()
+    object NotFound : KthumborResult<Nothing>()
+    object BadInput : KthumborResult<Nothing>()
 }
 
 /**
- * convert a URL path string([this]) with [imageGetter] to [AsyncThumbnailInput] wrapped in [ThumbnailResult]
+ * convert a URL path string([this]) with [imageGetter] to [AsyncThumbnailInput] wrapped in [KthumborResult]
  */
 suspend infix fun String.fetchWith(
-    imageGetter: suspend (String) -> ThumbnailResult<BufferedImage>
-): ThumbnailResult<AsyncThumbnailInput> = toThumbnailInput()?.let {
-    ThumbnailResult.Success(
+    imageGetter: suspend (String) -> KthumborResult<BufferedImage>
+): KthumborResult<AsyncThumbnailInput> = toThumbnailInput()?.let {
+    KthumborResult.Success(
         AsyncThumbnailInput(
             parameter = it.parameter,
             format = it.format,
             image = when (val result = imageGetter(it.originPath)) {
-                is ThumbnailResult.Success<BufferedImage> -> result.value
-                is ThumbnailResult.Failure -> return result
-                is ThumbnailResult.BadInput -> return result
-                is ThumbnailResult.NotFound -> return result
+                is KthumborResult.Success<BufferedImage> -> result.value
+                is KthumborResult.Failure -> return result
+                is KthumborResult.BadInput -> return result
+                is KthumborResult.NotFound -> return result
             }
         )
     )
-} ?: ThumbnailResult.BadInput
+} ?: KthumborResult.BadInput
 
 /**
  * append thumbnail specified by [AsyncThumbnailInput]
