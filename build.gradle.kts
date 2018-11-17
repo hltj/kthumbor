@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.0"
+    kotlin("jvm") version "1.3.10"
     application
 }
 
@@ -30,6 +30,7 @@ val ktorVersion = "1.0.0-beta-3"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
+    implementation(project(":share"))
     implementation(project(":parser"))
     implementation(project(":generator"))
     implementation(kotlin("stdlib-jdk8"))
