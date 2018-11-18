@@ -3,6 +3,7 @@ package me.hltj.kthumbor
 import me.hltj.kthumbor.generator.times
 import me.hltj.kthumbor.parser.toThumbnailInput
 import me.hltj.kthumbor.share.AsyncThumbnailInput
+import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.OutputStream
 import javax.imageio.ImageIO
@@ -38,5 +39,23 @@ suspend infix fun String.fetchWith(
  * append thumbnail specified by [AsyncThumbnailInput]
  */
 operator fun OutputStream.plusAssign(input: AsyncThumbnailInput) {
-    ImageIO.write(input.image * input.parameter, input.format, this)
+    val image = (input.image * input.parameter).let {
+        if (input.format in setOf("bmp", "jpeg")) it.withAlpha(false) else it
+    }
+    ImageIO.write(image, input.format, this)
+}
+
+/**
+ * return the same image with/without alpha channel
+ */
+internal fun BufferedImage.withAlpha(alpha: Boolean = true): BufferedImage {
+    val image = BufferedImage(width, height, if (alpha) BufferedImage.TYPE_INT_ARGB else BufferedImage.TYPE_INT_RGB)
+    val g = image.createGraphics()
+    if (!alpha) {
+        g.color = Color.WHITE
+        g.fillRect(0, 0, width, height)
+    }
+    g.drawImage(this, 0, 0, null)
+    g.dispose()
+    return image
 }
