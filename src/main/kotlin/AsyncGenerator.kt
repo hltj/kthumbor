@@ -3,6 +3,7 @@ package me.hltj.kthumbor
 import me.hltj.kthumbor.generator.times
 import me.hltj.kthumbor.parser.toThumbnailInput
 import me.hltj.kthumbor.share.AsyncThumbnailInput
+import me.hltj.kthumbor.share.hasAlpha
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.OutputStream
@@ -40,10 +41,15 @@ suspend infix fun String.fetchWith(
  */
 operator fun OutputStream.plusAssign(input: AsyncThumbnailInput) {
     val image = (input.image * input.parameter).let {
-        if (input.format in setOf("bmp", "jpeg")) it.withAlpha(false) else it
+        if (input.format.hasAlpha) it else it.withoutAlpha()
     }
-    ImageIO.write(image, input.format, this)
+    ImageIO.write(image, input.format.name, this)
 }
+
+/**
+ * return the same image without alpha channel
+ */
+internal fun BufferedImage.withoutAlpha(): BufferedImage = withAlpha(false)
 
 /**
  * return the same image with/without alpha channel

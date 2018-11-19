@@ -9,6 +9,7 @@ import kotlinx.coroutines.runBlocking
 import me.hltj.kthumbor.KthumborResult
 import me.hltj.kthumbor.fetchWith
 import me.hltj.kthumbor.share.AsyncThumbnailInput
+import me.hltj.kthumbor.share.ThumbnailFormat
 import me.hltj.kthumbor.share.ThumbnailParameter
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
@@ -24,7 +25,7 @@ class AsyncThumbnailInputTest : StringSpec({
                 with((this as KthumborResult.Success<AsyncThumbnailInput>).value) {
                     image should {  it equalsTo staticResourceImageOf("/oss.png") }
                     parameter shouldBe ThumbnailParameter(30, 20)
-                    format shouldBe "jpeg"
+                    format shouldBe ThumbnailFormat("jpeg")
                 }
             }
         }

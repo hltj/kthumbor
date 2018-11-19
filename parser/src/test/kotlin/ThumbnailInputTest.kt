@@ -3,6 +3,7 @@ package me.hltj.kthumbor.parser.test
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 import me.hltj.kthumbor.parser.toThumbnailInput
+import me.hltj.kthumbor.share.ThumbnailFormat
 import me.hltj.kthumbor.share.ThumbnailParameter
 
 class ThumbnailInputTest : StringSpec({
@@ -10,7 +11,7 @@ class ThumbnailInputTest : StringSpec({
         with("/oss.png.80x80.png".toThumbnailInput()!!) {
             originPath shouldBe "/oss.png"
             parameter shouldBe ThumbnailParameter(80, 80)
-            format shouldBe "png"
+            format shouldBe ThumbnailFormat("png")
         }
     }
 
@@ -18,7 +19,7 @@ class ThumbnailInputTest : StringSpec({
         with("/oss.png.60.jpg".toThumbnailInput()!!) {
             originPath shouldBe "/oss.png"
             parameter shouldBe ThumbnailParameter(60, 0)
-            format shouldBe "jpeg"
+            format shouldBe ThumbnailFormat("jpeg")
         }
     }
 
@@ -26,7 +27,7 @@ class ThumbnailInputTest : StringSpec({
         with("/oss.png.x40.gif".toThumbnailInput()!!) {
             originPath shouldBe "/oss.png"
             parameter shouldBe ThumbnailParameter(0, 40)
-            format shouldBe "gif"
+            format shouldBe ThumbnailFormat("gif")
         }
     }
 
@@ -34,7 +35,7 @@ class ThumbnailInputTest : StringSpec({
         with("/oss.png.30x20.bmp".toThumbnailInput()!!) {
             originPath shouldBe "/oss.png"
             parameter shouldBe ThumbnailParameter(30, 20)
-            format shouldBe "bmp"
+            format shouldBe ThumbnailFormat("bmp")
         }
     }
 

@@ -1,11 +1,13 @@
 package me.hltj.kthumbor.parser
 
+import me.hltj.kthumbor.share.ThumbnailFormat
 import me.hltj.kthumbor.share.ThumbnailParameter
+import me.hltj.kthumbor.share.toThumbnailFormat
 
 data class ThumbnailInput(
     val originPath: String,
     val parameter: ThumbnailParameter,
-    val format: String
+    val format: ThumbnailFormat
 )
 
 /**
