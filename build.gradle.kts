@@ -21,12 +21,10 @@ allprojects {
 
 repositories {
     jcenter()
-    maven(url = "https://kotlin.bintray.com/kotlinx")
-    maven(url = "https://kotlin.bintray.com/ktor")
     mavenCentral()
 }
 
-val ktorVersion = "1.0.0-beta-3"
+val ktorVersion = "1.0.0"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
@@ -46,4 +44,5 @@ application.mainClassName = "io.ktor.server.cio.EngineMain"
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
 }
