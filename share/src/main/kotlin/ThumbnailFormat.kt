@@ -11,4 +11,4 @@ fun String.toThumbnailFormat(): ThumbnailFormat? = when (val lower = toLowerCase
     else -> null
 }
 
-val ThumbnailFormat.hasAlpha get() = name in setOf("png", "gif")
+val ThumbnailFormat.supportAlpha get() = name in setOf("png", "gif")

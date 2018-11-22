@@ -3,7 +3,7 @@ package me.hltj.kthumbor
 import me.hltj.kthumbor.generator.times
 import me.hltj.kthumbor.parser.toThumbnailInput
 import me.hltj.kthumbor.share.AsyncThumbnailInput
-import me.hltj.kthumbor.share.hasAlpha
+import me.hltj.kthumbor.share.supportAlpha
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.OutputStream
@@ -41,7 +41,7 @@ suspend infix fun String.fetchWith(
  */
 operator fun OutputStream.plusAssign(input: AsyncThumbnailInput) {
     val image = (input.image * input.parameter).let {
-        if (input.format.hasAlpha) it else it.withoutAlpha()
+        if (input.format.supportAlpha) it else it.withoutAlpha()
     }
     ImageIO.write(image, input.format.name, this)
 }
