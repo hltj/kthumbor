@@ -1,0 +1,1 @@
+# Kthumbor - a thumbnail service
