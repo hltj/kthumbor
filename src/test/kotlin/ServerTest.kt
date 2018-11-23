@@ -5,9 +5,10 @@ import io.kotlintest.specs.*
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
+import kotlinx.coroutines.*
 import me.hltj.kthumbor.module
 
-class ServerTest : StringSpec({
+class BasicTest : StringSpec({
     "200 /" {
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/").response) {
@@ -30,7 +31,9 @@ class ServerTest : StringSpec({
             }
         }
     }
+})
 
+class ThumbnailsTest: StringSpec({
     "200 /oss.png.80x80.png" {
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/oss.png.80x80.png").response) {
@@ -90,7 +93,14 @@ class ServerTest : StringSpec({
             }
         }
     }
-})
+}) {
+    override fun beforeSpec(description: Description, spec: Spec) {
+        GlobalScope.launch {
+            io.ktor.server.cio.EngineMain.main(emptyArray())
+        }
+        super.beforeSpec(description, spec)
+    }
+}
 
 internal fun TestContext.staticResourceOf(relativePath: String) =
     this::class.java.getResource("/static-test$relativePath")
