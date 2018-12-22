@@ -20,11 +20,11 @@ class ThumbnailParameterTest : StringSpec({
     }
 
     "40x030 => null" {
-        "40x0".toThumbnailParameter() shouldBe null
+        "40x030".toThumbnailParameter() shouldBe null
     }
 
     "040x30 => null" {
-        "0x30".toThumbnailParameter() shouldBe null
+        "040x30".toThumbnailParameter() shouldBe null
     }
 
     "40x0 => null" {
