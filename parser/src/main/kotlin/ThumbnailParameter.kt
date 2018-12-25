@@ -10,8 +10,11 @@ internal fun String.toThumbnailParameter(): ThumbnailParameter? {
 
     val width = groups["width"]?.value?.toIntOrNull() ?: 0
     val height = groups["height"]?.value?.toIntOrNull() ?: 0
+    val enlargeable = groups["enlargeable"]?.value == "e"
 
-    return if (width == 0 && height == 0) null else ThumbnailParameter(width, height)
+    return if (width == 0 && height == 0) null else ThumbnailParameter(width, height, enlargeable)
 }
 
-private val paramRegex = Regex("""(?<width>[1-9](?:[0-9]*))?(?:x(?<height>[1-9](?:[0-9]*)))?""")
+private val paramRegex = Regex(
+    """(?<width>[1-9](?:[0-9]*))?(?:x(?<height>[1-9](?:[0-9]*)))?(?<enlargeable>e)?"""
+)
