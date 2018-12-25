@@ -39,6 +39,14 @@ class ThumbnailInputTest : StringSpec({
         }
     }
 
+    "/oss.png.800x900e.png" {
+        with("/oss.png.800x900e.png".toThumbnailInput()!!) {
+            originPath shouldBe "/oss.png"
+            parameter shouldBe ThumbnailParameter(800, 900, enlargeable = true)
+            format shouldBe ThumbnailFormat("png")
+        }
+    }
+
     "/oss.png.0x0.png => null" {
         "/path/to/image.0x0.png".toThumbnailInput() shouldBe null
     }
