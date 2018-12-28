@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.10"
+    kotlin("jvm") version "1.3.11"
     application
 }
 
@@ -24,7 +24,7 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "1.0.0"
+val ktorVersion = "1.1.1"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
@@ -37,9 +37,7 @@ dependencies {
     implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
     testImplementation(ktor("server-test-host"))
     testImplementation(kotlin("reflect"))
-    testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.10") {
-        exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
-    }
+    testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.11")
 }
 
 application.mainClassName = "io.ktor.server.cio.EngineMain"
