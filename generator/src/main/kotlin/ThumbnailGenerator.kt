@@ -13,5 +13,6 @@ operator fun BufferedImage.times(parameter: ThumbnailParameter): BufferedImage {
     val w = if (parameter.width > 0) parameter.width else (parameter.height * width / height.toDouble()).roundToInt()
     val h = if (parameter.height > 0) parameter.height else (parameter.width * height / width.toDouble()).roundToInt()
 
-    return if (w > width && h > height) this else Thumbnails.of(this).size(w, h).asBufferedImage()
+    return if (w > width && h > height && !parameter.enlargeable) this
+    else Thumbnails.of(this).size(w, h).asBufferedImage()
 }
