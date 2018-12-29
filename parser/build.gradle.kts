@@ -4,7 +4,9 @@ dependencies {
     api(project(":share"))
     implementation(kotlin("stdlib-jdk8"))
     testImplementation(kotlin("reflect"))
-    testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.11")
+    testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.11"){
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
+    }
     testImplementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
 }
 
