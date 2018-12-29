@@ -95,4 +95,33 @@ class ThumbnailGeneratorTest : StringSpec({
             height shouldBe 500
         }
     }
+
+    "square * 1000x1000-e => 1000x1000" {
+        with(squareImage * ThumbnailParameter(1000, 1000, enlargeable = true)) {
+            width shouldBe 1000
+            height shouldBe 1000
+        }
+    }
+
+    "square * x1000-e => 1000x1000" {
+        with(squareImage * ThumbnailParameter(0, 1000, enlargeable = true)) {
+            width shouldBe 1000
+            height shouldBe 1000
+        }
+    }
+
+    "square * 1000x800-e => 800x800" {
+        with(squareImage * ThumbnailParameter(1000, 800, enlargeable = true)) {
+            width shouldBe 800
+            height shouldBe 800
+        }
+    }
+
+
+    "square * 200x1000-e => 200x200" {
+        with(squareImage * ThumbnailParameter(200, 1000, enlargeable = true)) {
+            width shouldBe 200
+            height shouldBe 200
+        }
+    }
 })

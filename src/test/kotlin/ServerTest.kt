@@ -70,6 +70,15 @@ class ThumbnailsTest: StringSpec({
         }
     }
 
+    "200 /oss.png.800x800e.jpg" {
+        withTestApplication(Application::module) {
+            with(handleRequest(HttpMethod.Get, "/oss.png.800x800e.jpg").response) {
+                status() shouldBe HttpStatusCode.OK
+                byteContent shouldBe staticResourceOf("/oss.png.800x800e.jpg").readBytes()
+            }
+        }
+    }
+
     "400 /oss.png.not-param.png" {
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/oss.png.notparam.png").response) {
