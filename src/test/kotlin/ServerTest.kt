@@ -103,11 +103,11 @@ class ThumbnailsTest: StringSpec({
         }
     }
 }) {
-    override fun beforeSpec(description: Description, spec: Spec) {
+    override fun beforeSpec(spec: Spec) {
         GlobalScope.launch {
             io.ktor.server.cio.EngineMain.main(emptyArray())
         }
-        super.beforeSpec(description, spec)
+        super.beforeSpec(spec)
     }
 }
 
