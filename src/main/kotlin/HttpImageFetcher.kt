@@ -16,8 +16,8 @@ suspend fun httpImageOf(path: String): KthumborResult<BufferedImage> = try {
     val bytes = httpClient.get<ByteArray>("http://localhost:8080$path")
 
     KthumborResult.Success(ImageIO.read(bytes.inputStream()).withAlpha())
-} catch (e: BadResponseStatusException) {
-    if (e.statusCode == HttpStatusCode.NotFound) KthumborResult.NotFound else KthumborResult.BadInput
+} catch (e: ResponseException) {
+    if (e.response.status == HttpStatusCode.NotFound) KthumborResult.NotFound else KthumborResult.BadInput
 } catch (e: Exception) {
     KthumborResult.Failure(e)
 }
