@@ -5,8 +5,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testImplementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
     testImplementation(kotlin("reflect"))
-    testImplementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.2.1")
-    testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.3.2") {
+    testImplementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.2.2")
+    testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.4.0") {
         exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib")
         exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib-jdk7")
         exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
