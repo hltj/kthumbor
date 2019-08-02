@@ -7,6 +7,9 @@ import io.ktor.http.*
 import io.ktor.server.testing.*
 import kotlinx.coroutines.*
 import me.hltj.kthumbor.module
+import java.io.ByteArrayInputStream
+import java.net.URL
+import javax.imageio.ImageIO
 
 class BasicTest : StringSpec({
     "200 /" {
@@ -38,7 +41,7 @@ class ThumbnailsTest: StringSpec({
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/oss.png.80x80.png").response) {
                 status() shouldBe HttpStatusCode.OK
-                byteContent shouldBe staticResourceOf("/oss.png.80x80.png").readBytes()
+                byteContent shouldBeSameImageAs staticResourceOf("/oss.png.80x80.png")
             }
         }
     }
@@ -47,7 +50,7 @@ class ThumbnailsTest: StringSpec({
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/oss.png.60.jpg").response) {
                 status() shouldBe  HttpStatusCode.OK
-                byteContent shouldBe staticResourceOf("/oss.png.60x60.jpg").readBytes()
+                byteContent shouldBeSameImageAs staticResourceOf("/oss.png.60x60.jpg")
             }
         }
     }
@@ -56,7 +59,7 @@ class ThumbnailsTest: StringSpec({
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/oss.png.x40.gif").response) {
                 status() shouldBe HttpStatusCode.OK
-                byteContent shouldBe staticResourceOf("/oss.png.40x40.gif").readBytes()
+                byteContent shouldBeSameImageAs staticResourceOf("/oss.png.40x40.gif")
             }
         }
     }
@@ -65,7 +68,7 @@ class ThumbnailsTest: StringSpec({
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/oss.png.30x20.bmp").response) {
                 status() shouldBe HttpStatusCode.OK
-                byteContent shouldBe staticResourceOf("/oss.png.20x20.bmp").readBytes()
+                byteContent shouldBeSameImageAs staticResourceOf("/oss.png.20x20.bmp")
             }
         }
     }
@@ -74,7 +77,7 @@ class ThumbnailsTest: StringSpec({
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/oss.png.800x800e.jpg").response) {
                 status() shouldBe HttpStatusCode.OK
-                byteContent shouldBe staticResourceOf("/oss.png.800x800e.jpg").readBytes()
+                byteContent shouldBeSameImageAs staticResourceOf("/oss.png.800x800e.jpg")
             }
         }
     }
@@ -112,4 +115,15 @@ class ThumbnailsTest: StringSpec({
 }
 
 internal fun TestContext.staticResourceOf(relativePath: String) =
-    this::class.java.getResource("/static-test$relativePath")
+    this::class.java.getResource("/static-test$relativePath")!!
+
+private fun ByteArray?.imageDataBuffer() = ImageIO.read(ByteArrayInputStream(this)).data.dataBuffer
+
+private infix fun ByteArray?.shouldBeSameImageAs(url: URL) {
+    val actualBuffer = imageDataBuffer()
+    val expectedBuffer = url.readBytes().imageDataBuffer()
+    actualBuffer.size shouldBe expectedBuffer.size
+    (1 until actualBuffer.size).forEach {
+        actualBuffer.getElem(it) shouldBe expectedBuffer.getElem(it)
+    }
+}
