@@ -15,6 +15,7 @@ private val httpClient = HttpClient(CIO)
 suspend fun httpImageOf(path: String): KthumborResult<BufferedImage> = try {
     val bytes = httpClient.get<ByteArray>("http://localhost:8080$path")
 
+    @Suppress("BlockingMethodInNonBlockingContext")
     KthumborResult.Success(ImageIO.read(bytes.inputStream()).withAlpha())
 } catch (e: ResponseException) {
     if (e.response.status == HttpStatusCode.NotFound) KthumborResult.NotFound else KthumborResult.BadInput

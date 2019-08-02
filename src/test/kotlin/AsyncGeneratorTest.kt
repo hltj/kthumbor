@@ -1,3 +1,5 @@
+@file:Suppress("BlockingMethodInNonBlockingContext")
+
 package me.hltj.kthumbor.test
 
 import io.kotlintest.TestContext
