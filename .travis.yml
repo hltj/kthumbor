@@ -1,57 +1,91 @@
 language: java
 
-before_script:
-  - sed '/tasks\.withType<Test>/,$d' build.gradle.kts > t && mv -f t build.gradle.kts
-
-script:
-  - ./gradlew build
-
-after_script:
-  - git reset --hard HEAD
-
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-
 matrix:
   include:
+    - name: Ubuntu 18.04 OpenJDK 12
+      dist: bionic
+      jdk:
+        - openjdk12
+
     - name: Ubuntu 18.04 OpenJDK 11
       dist: bionic
       jdk:
         - openjdk11
-      script:
-        - ./gradlew build
-        - gradle clean build
 
-    - name: Ubuntu 16.04 OpenJDK 8
+    - name: Ubuntu 16.04 OpenJDK 12
       dist: xenial
       jdk:
-        - openjdk8
-      script:
-        - ./gradlew build
-        - gradle clean build
+        - openjdk12
 
     - name: Ubuntu 16.04 OpenJDK 11
       dist: xenial
       jdk:
         - openjdk11
-      script:
-        - ./gradlew build
-        - gradle clean build
 
-    - name: macOS 10.13 JDK 8
+    - name: Ubuntu 16.04 OpenJDK 8
+      dist: xenial
+      jdk:
+        - openjdk8
+
+    - name: macOS 10.14 OpenJDK 12
       os: osx
-      osx_image: xcode9.3
+      osx_image: xcode11
 
     - name: macOS 10.13 OpenJDK 11
       os: osx
       osx_image: xcode10.1
 
-    - name: macOS 10.14 OpenJDK 12
+    - name: macOS 10.13 JDK 8
       os: osx
-      osx_image: xcode11
+      osx_image: xcode9.3
+
+    - name: Windows 18.03 Zulu OpenJDK 12
+      os: windows
+      language: bash
+      env:
+        - JAVAVER=12
+
+    - name: Windows 18.03 Zulu OpenJDK 11
+      os: windows
+      language: bash
+      env:
+        - JAVAVER=11
+
+    - name: Windows 18.03 Zulu OpenJDK 8
+      os: windows
+      language: bash
+      env:
+        - JAVAVER=8
+
+before_install:
+  - |
+    if [ "$TRAVIS_OS_NAME" == "windows" ]
+    then
+      choco install zulu$JAVAVER -y
+      export JAVA_HOME=${JAVA_HOME:-/c/Program Files/Zulu/zulu-$JAVAVER}
+      export PATH=$JAVA_HOME/bin:$PATH
+    fi
+
+before_script:
+  - sed '/tasks\.withType<Test>/,$d' build.gradle.kts > t && mv -f t build.gradle.kts
+
+script:
+  - ./gradlew build
+  - ./gradlew --stop
+
+after_script:
+  - git reset --hard HEAD
+
+before_cache:
+  - |
+    rm -f $HOME/.gradle/caches/journal-1/file-access.bin
+    rm -f $HOME/.gradle/caches/*/fileHashes/fileHashes.bin
+    rm -f $HOME/.gradle/caches/*/workerMain/gradle-worker.jar
+    rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+    find $HOME/.gradle/caches/ -name '*.lock' | xargs rm -f
+    find $HOME/.gradle/caches/ -name 'cache.properties' | xargs rm -f
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
