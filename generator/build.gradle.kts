@@ -6,7 +6,7 @@ dependencies {
     implementation(group = "net.coobird", name = "thumbnailator", version = "0.4.8")
     testImplementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
     testImplementation(kotlin("reflect"))
-    testImplementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.2.2") {}
+    testImplementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.3.0") {}
     testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.4.0") {
         exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib")
         exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib-jdk7")
