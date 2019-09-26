@@ -33,16 +33,18 @@ dependencies {
     implementation(project(":parser"))
     implementation(project(":generator"))
     implementation(kotlin("stdlib-jdk8"))
-    implementation(ktor("server-cio"))
-    implementation(ktor("client-cio"))
     implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
-    testImplementation(ktor("server-test-host"))
-    testImplementation(kotlin("reflect"))
-    testImplementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.3.0")
-    testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.4.0") {
-        exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib")
-        exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib-jdk7")
-        exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
+    implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-jdk8", version = "1.3.1")
+    implementation(ktor("server-cio")) {
+        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-jdk8")
+    }
+    implementation(ktor("client-cio")) {
+        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-jdk8")
+    }
+    testImplementation(ktor("server-test-host")) {
+        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-jdk8")
+    }
+    testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.4.2") {
         exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-core")
     }
 }
