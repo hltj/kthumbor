@@ -18,7 +18,7 @@ Kthumbor 是用 [Kotlin](https://www.kotlincn.net/) 与 [Ktor](https://ktor.kotl
 
 ## Build Status 构建状态
 
-|  | Java 12 | Java 11 | Java 8|
+|  | Java 13 | Java 11 | Java 8|
 |--|---------|---------|-------|
 | [![Ubuntu 18.04](https://img.shields.io/badge/Ubuntu_18-black?logo=ubuntu&labelColor=black)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/1)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/2)](https://travis-ci.org/hltj/kthumbor) | - |
 | [![Ubuntu 16.04](https://img.shields.io/badge/Ubuntu_16-black?logo=ubuntu&labelColor=black)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/3)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/4)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/5)](https://travis-ci.org/hltj/kthumbor) |
