@@ -5,8 +5,9 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(group = "net.coobird", name = "thumbnailator", version = "0.4.8")
     testImplementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
-    testImplementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.3.1")
+    testImplementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.3.3")
     testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.4.2") {
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
         exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-core")
     }
 }

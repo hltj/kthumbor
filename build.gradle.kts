@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.50"
+    kotlin("jvm") version "1.3.61"
     application
     `project-report`
 }
@@ -15,8 +15,8 @@ allprojects {
     version = "1.0-SNAPSHOT"
 
     repositories {
-        jcenter()
         mavenCentral()
+        jcenter()
     }
 }
 
@@ -25,7 +25,7 @@ repositories {
     jcenter()
 }
 
-val ktorVersion = "1.2.4"
+val ktorVersion = "1.3.0"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
@@ -34,17 +34,11 @@ dependencies {
     implementation(project(":generator"))
     implementation(kotlin("stdlib-jdk8"))
     implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
-    implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-jdk8", version = "1.3.1")
-    implementation(ktor("server-cio")) {
-        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-jdk8")
-    }
-    implementation(ktor("client-cio")) {
-        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-jdk8")
-    }
-    testImplementation(ktor("server-test-host")) {
-        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-jdk8")
-    }
+    implementation(ktor("server-cio"))
+    implementation(ktor("client-cio"))
+    testImplementation(ktor("server-test-host"))
     testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.4.2") {
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
         exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-core")
     }
 }
