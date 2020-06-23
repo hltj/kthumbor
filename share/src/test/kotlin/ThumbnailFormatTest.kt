@@ -1,7 +1,7 @@
 package me.hltj.kthumbor.share.test
 
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 import me.hltj.kthumbor.share.ThumbnailFormat
 import me.hltj.kthumbor.share.toThumbnailFormat
 

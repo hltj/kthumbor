@@ -3,11 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testImplementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
-    testImplementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.3.3")
-    testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.4.2") {
-        exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
-        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-core")
-    }
+    testImplementation(group = "io.kotest", name = "kotest-runner-junit5-jvm", version = "4.1.0")
 }
 
 tasks.withType<KotlinCompile> {

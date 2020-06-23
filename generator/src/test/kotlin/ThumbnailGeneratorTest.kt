@@ -1,10 +1,9 @@
 package me.hltj.kthumbor.generator.test
 
-import me.hltj.kthumbor.share.ThumbnailParameter
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 import me.hltj.kthumbor.generator.times
-
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import me.hltj.kthumbor.share.ThumbnailParameter
 import java.awt.image.BufferedImage
 
 class ThumbnailGeneratorTest : StringSpec({

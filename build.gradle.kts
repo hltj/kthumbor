@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.61"
+    kotlin("jvm") version "1.3.72"
     application
     `project-report`
 }
@@ -25,7 +25,7 @@ repositories {
     jcenter()
 }
 
-val ktorVersion = "1.3.0"
+val ktorVersion = "1.3.2"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
@@ -37,17 +37,14 @@ dependencies {
     implementation(ktor("server-cio"))
     implementation(ktor("client-cio"))
     testImplementation(ktor("server-test-host"))
-    testImplementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.4.2") {
-        exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
-        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-coroutines-core")
-    }
+    testImplementation(group = "io.kotest", name = "kotest-runner-junit5-jvm", version = "4.1.0")
 }
 
 application.mainClassName = "io.ktor.server.cio.EngineMain"
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
-    kotlinOptions.freeCompilerArgs = listOf("-Xinline-classes", "-Xuse-experimental=kotlin.Experimental")
+    kotlinOptions.freeCompilerArgs = listOf("-Xinline-classes", "-Xopt-in=kotlin.Experimental")
 }
 
 tasks.withType<Test> {

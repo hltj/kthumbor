@@ -2,10 +2,10 @@
 
 package me.hltj.kthumbor.test
 
-import io.kotlintest.TestContext
-import io.kotlintest.should
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.test.TestContext
+import io.kotest.matchers.should
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import me.hltj.kthumbor.KthumborResult

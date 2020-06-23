@@ -1,11 +1,16 @@
 package me.hltj.kthumbor.test
 
-import io.kotlintest.*
-import io.kotlintest.specs.*
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.server.testing.*
-import kotlinx.coroutines.*
+import io.kotest.core.spec.Spec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.test.TestContext
+import io.kotest.matchers.shouldBe
+import io.ktor.application.Application
+import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.testing.handleRequest
+import io.ktor.server.testing.withTestApplication
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import me.hltj.kthumbor.module
 import java.io.ByteArrayInputStream
 import java.net.URL
