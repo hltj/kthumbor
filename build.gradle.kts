@@ -8,7 +8,10 @@ plugins {
 }
 
 subprojects {
-    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply {
+        plugin("org.jetbrains.kotlin.jvm")
+        plugin("jacoco")
+    }
 }
 
 allprojects {
@@ -54,7 +57,15 @@ tasks.test {
 }
 
 tasks.jacocoTestReport {
+    dependsOn(subprojects.map { it.tasks.test })
     dependsOn(tasks.test)
+
+    executionData(fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec"))
+
+    subprojects.forEach {
+        sourceSets(it.sourceSets["main"])
+    }
+
     reports {
         xml.isEnabled = true
         xml.destination = file("$buildDir/reports/jacoco/report.xml")
