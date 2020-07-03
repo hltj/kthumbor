@@ -3,6 +3,7 @@
 [![Kotlin language](https://img.shields.io/badge/language-Kotlin-2281fb.svg?logo=kotlin)](https://kotlinlang.org/)
 [![License: AGPL v3](https://img.shields.io/badge/license-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Build Status](https://img.shields.io/travis/hltj/kthumbor)](https://travis-ci.org/hltj/kthumbor)
+[![Codecov](https://img.shields.io/codecov/c/github/hltj/kthumbor)](https://codecov.io/gh/hltj/kthumbor)
 [![HitCount](http://hits.dwyl.io/hltj/kthumbor.svg)](https://github.com/hltj/kthumbor)
 
 Kthumbor is an HTTP thumbnail service application implemented with [Kotlin](https://kotlinlang.org/) & [Ktor](https://ktor.io/).
