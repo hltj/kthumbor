@@ -65,7 +65,7 @@ before_install:
     fi
 
 before_script:
-  - sed '/tasks\.withType<Test>/,$d' build.gradle.kts > t && mv -f t build.gradle.kts
+  - sed '/tasks\.test/,$d' build.gradle.kts > t && mv -f t build.gradle.kts
 
 script:
   - ./gradlew build
