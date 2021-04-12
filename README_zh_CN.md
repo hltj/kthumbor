@@ -4,7 +4,7 @@
 [![授权许可：AGPL v3](https://img.shields.io/badge/授权许可-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![构建状态](https://img.shields.io/travis/hltj/kthumbor?label=构建)](https://travis-ci.org/hltj/kthumbor)
 [![测试覆盖率](https://img.shields.io/codecov/c/github/hltj/kthumbor?label=测试覆盖)](https://codecov.io/gh/hltj/kthumbor)
-[![点击次数](http://hits.dwyl.io/hltj/kthumbor.svg)](https://github.com/hltj/kthumbor)
+[![访客数](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fhltj%2Fkthumbor&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=%E8%AE%BF%E5%AE%A2&edge_flat=false)](https://github.com/hltj/kthumbor)
 
 Kthumbor 是用 [Kotlin](https://www.kotlincn.net/) 与 [Ktor](https://ktor.kotlincn.net/) 实现的 HTTP 缩略图服务程序。
 
