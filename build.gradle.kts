@@ -13,6 +13,10 @@ subprojects {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("jacoco")
     }
+
+    tasks.test {
+        useJUnitPlatform()
+    }
 }
 
 allprojects {
@@ -30,10 +34,6 @@ allprojects {
 
     tasks.compileTestKotlin {
         kotlinOptions.useIR = true
-    }
-
-    tasks.test {
-        useJUnitPlatform()
     }
 
     dependencies {
@@ -72,6 +72,7 @@ tasks.compileKotlin {
 }
 
 tasks.test {
+    useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
 }
 
