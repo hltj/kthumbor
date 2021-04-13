@@ -76,6 +76,7 @@ tasks.test {
 }
 
 tasks.jacocoTestReport {
+    dependsOn(subprojects.map { it.tasks.test })
     dependsOn(tasks.test)
     dependsOn(tasks.withType<CreateStartScripts>())
 
