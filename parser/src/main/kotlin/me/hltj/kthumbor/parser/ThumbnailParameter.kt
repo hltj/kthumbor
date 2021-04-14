@@ -16,5 +16,5 @@ internal fun String.toThumbnailParameter(): ThumbnailParameter? {
 }
 
 private val paramRegex = Regex(
-    """(?<width>[1-9](?:[0-9]*))?(?:x(?<height>[1-9](?:[0-9]*)))?(?<enlargeable>e)?"""
+    """(?<width>[1-9][0-9]*)?(?:x(?<height>[1-9][0-9]*))?(?<enlargeable>e)?"""
 )
