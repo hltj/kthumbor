@@ -4,11 +4,10 @@ import io.kotest.core.spec.Spec
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.core.test.TestContext
 import io.kotest.matchers.shouldBe
-import io.ktor.application.Application
-import io.ktor.http.HttpMethod
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.testing.handleRequest
-import io.ktor.server.testing.withTestApplication
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.server.testing.*
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import me.hltj.kthumbor.module
@@ -41,7 +40,7 @@ class BasicTest : StringSpec({
     }
 })
 
-class ThumbnailsTest: StringSpec({
+class ThumbnailsTest : StringSpec({
     "200 /oss.png.80x80.png" {
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/oss.png.80x80.png").response) {
@@ -54,7 +53,7 @@ class ThumbnailsTest: StringSpec({
     "200 /oss.png.60.jpg" {
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/oss.png.60.jpg").response) {
-                status() shouldBe  HttpStatusCode.OK
+                status() shouldBe HttpStatusCode.OK
                 byteContent shouldBeSameImageAs staticResourceOf("/oss.png.60x60.jpg")
             }
         }
@@ -111,6 +110,7 @@ class ThumbnailsTest: StringSpec({
         }
     }
 }) {
+    @DelicateCoroutinesApi
     override fun beforeSpec(spec: Spec) {
         GlobalScope.launch {
             io.ktor.server.cio.EngineMain.main(emptyArray())

@@ -1,11 +1,11 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.10"
     application
     jacoco
     `project-report`
-    id("com.github.ben-manes.versions") version "0.38.0"
+    id("com.github.ben-manes.versions") version "0.39.0"
 }
 
 subprojects {
@@ -29,11 +29,6 @@ allprojects {
 
     tasks.compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
-        kotlinOptions.useIR = true
-    }
-
-    tasks.compileTestKotlin {
-        kotlinOptions.useIR = true
     }
 
     dependencies {
@@ -42,7 +37,7 @@ allprojects {
         testImplementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3") {
             exclude(group = "org.slf4j", module = "slf4j-api")
         }
-        testImplementation(group = "io.kotest", name = "kotest-runner-junit5-jvm", version = "4.4.3")
+        testImplementation(group = "io.kotest", name = "kotest-runner-junit5-jvm", version = "4.6.0")
     }
 }
 
@@ -50,7 +45,7 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "1.5.3"
+val ktorVersion = "1.6.0"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
@@ -67,13 +62,13 @@ dependencies {
 
 application.mainClass.set("io.ktor.server.cio.EngineMain")
 
-tasks.compileKotlin {
-    kotlinOptions.freeCompilerArgs = listOf("-Xinline-classes", "-Xopt-in=kotlin.Experimental")
-}
-
 tasks.test {
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
+}
+
+jacoco {
+    toolVersion = "0.8.7"
 }
 
 tasks.jacocoTestReport {
