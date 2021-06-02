@@ -41,6 +41,15 @@ class BasicTest : StringSpec({
 })
 
 class ThumbnailsTest : StringSpec({
+    "200 /oss.png" {
+        withTestApplication(Application::module) {
+            with(handleRequest(HttpMethod.Get, "/oss.png").response) {
+                status() shouldBe HttpStatusCode.OK
+                byteContent shouldBeSameImageAs staticResourceOf("/oss.png")
+            }
+        }
+    }
+
     "200 /oss.png.80x80.png" {
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Get, "/oss.png.80x80.png").response) {
