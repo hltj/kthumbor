@@ -85,9 +85,9 @@ tasks.jacocoTestReport {
     }
 
     reports {
-        xml.isEnabled = true
-        xml.destination = file("$buildDir/reports/jacoco/report.xml")
-        csv.isEnabled = false
+        xml.required.set(true)
+        xml.outputLocation.set(file("$buildDir/reports/jacoco/report.xml"))
+        csv.required.set(false)
     }
 }
 
