@@ -1,7 +1,7 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.5.21"
     application
     jacoco
     `project-report`
@@ -19,6 +19,8 @@ subprojects {
     }
 }
 
+val logbackDependency = "ch.qos.logback:logback-classic:1.2.5"
+
 allprojects {
     group = "me.hltj"
     version = "1.0-SNAPSHOT"
@@ -33,11 +35,11 @@ allprojects {
 
     dependencies {
         implementation(kotlin("stdlib-jdk8"))
-        testImplementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.30")
-        testImplementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3") {
+        testImplementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.32")
+        testImplementation(logbackDependency) {
             exclude(group = "org.slf4j", module = "slf4j-api")
         }
-        testImplementation(group = "io.kotest", name = "kotest-runner-junit5-jvm", version = "4.6.0")
+        testImplementation(group = "io.kotest", name = "kotest-runner-junit5-jvm", version = "4.6.1")
     }
 }
 
@@ -45,14 +47,14 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "1.6.0"
+val ktorVersion = "1.6.2"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
     implementation(project(":share"))
     implementation(project(":parser"))
     implementation(project(":generator"))
-    implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3") {
+    implementation(logbackDependency) {
         exclude(group = "org.slf4j", module = "slf4j-api")
     }
     implementation(ktor("server-cio"))
