@@ -27,10 +27,6 @@ allprojects {
         mavenCentral()
     }
 
-    tasks.compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-
     dependencies {
         implementation(kotlin("stdlib-jdk8"))
         testImplementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.32")
@@ -45,7 +41,7 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "1.6.5"
+val ktorVersion = "1.6.4"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
