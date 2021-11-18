@@ -12,6 +12,7 @@ import javax.imageio.ImageIO
 
 private val httpClient = HttpClient(CIO)
 
+@Suppress("kotlin:S6310")
 suspend fun httpImageOf(path: String): KthumborResult<BufferedImage> = try {
     val bytes = httpClient.get<ByteArray>("http://localhost:8080$path")
     val image = withContext(Dispatchers.IO) {

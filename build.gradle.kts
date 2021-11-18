@@ -1,7 +1,5 @@
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-
 plugins {
-    kotlin("jvm") version "1.5.21"
+    kotlin("jvm") version "1.6.0"
     application
     jacoco
     `project-report`
@@ -19,7 +17,7 @@ subprojects {
     }
 }
 
-val logbackDependency = "ch.qos.logback:logback-classic:1.2.5"
+val logbackDependency = "ch.qos.logback:logback-classic:1.2.7"
 
 allprojects {
     group = "me.hltj"
@@ -39,7 +37,7 @@ allprojects {
         testImplementation(logbackDependency) {
             exclude(group = "org.slf4j", module = "slf4j-api")
         }
-        testImplementation(group = "io.kotest", name = "kotest-runner-junit5-jvm", version = "4.6.1")
+        testImplementation(group = "io.kotest", name = "kotest-runner-junit5-jvm", version = "4.6.3")
     }
 }
 
@@ -47,7 +45,7 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "1.6.2"
+val ktorVersion = "1.6.5"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
@@ -91,14 +89,14 @@ tasks.jacocoTestReport {
     }
 }
 
-tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
+tasks.dependencyUpdates {
     rejectVersionIf {
         isNonStable(candidate.version)
     }
 }
 
 fun isNonStable(version: String): Boolean {
-    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { it in version.toUpperCase() }
     val regex = "^[0-9,.v-]+(-r)?$".toRegex()
     return !stableKeyword && !regex.matches(version)
 }

@@ -7,13 +7,11 @@ import io.kotest.matchers.shouldBe
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import me.hltj.kthumbor.module
 import java.io.ByteArrayInputStream
 import java.net.URL
 import javax.imageio.ImageIO
+import kotlin.concurrent.thread
 
 class BasicTest : StringSpec({
     "200 /" {
@@ -119,9 +117,8 @@ class ThumbnailsTest : StringSpec({
         }
     }
 }) {
-    @DelicateCoroutinesApi
     override fun beforeSpec(spec: Spec) {
-        GlobalScope.launch {
+        thread {
             io.ktor.server.cio.EngineMain.main(emptyArray())
         }
         super.beforeSpec(spec)
