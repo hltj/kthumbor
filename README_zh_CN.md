@@ -13,7 +13,7 @@ Kthumbor 是用 [Kotlin](https://www.kotlincn.net/) 与 [Ktor](https://ktor.kotl
 <!--
 ## 构建状态
 
-|  | Java 16 | Java 11 | Java 8|
+|  | Java 17 | Java 11 | Java 8|
 |--|---------|---------|-------|
 | [![Ubuntu](https://img.shields.io/badge/Ubuntu-black?logo=ubuntu&labelColor=black)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/1)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/2)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/3)](https://travis-ci.org/hltj/kthumbor) |
 | [![macOS](https://img.shields.io/badge/macOS-black?logo=apple&labelColor=black)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/4)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/5)](https://travis-ci.org/hltj/kthumbor) | [![](https://travis-matrix-badges.herokuapp.com/repos/hltj/kthumbor/branches/master/6)](https://travis-ci.org/hltj/kthumbor) |
