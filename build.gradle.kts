@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.6.0"
+    kotlin("jvm") version "1.6.10"
     application
     jacoco
     `project-report`
@@ -17,7 +17,7 @@ subprojects {
     }
 }
 
-val logbackDependency = "ch.qos.logback:logback-classic:1.2.7"
+val logbackDependency = "ch.qos.logback:logback-classic:1.2.8"
 
 allprojects {
     group = "me.hltj"
@@ -33,7 +33,7 @@ allprojects {
         testImplementation(logbackDependency) {
             exclude(group = "org.slf4j", module = "slf4j-api")
         }
-        testImplementation(group = "io.kotest", name = "kotest-runner-junit5-jvm", version = "4.6.3")
+        testImplementation(group = "io.kotest", name = "kotest-runner-junit5-jvm", version = "5.0.2")
     }
 }
 
@@ -41,7 +41,7 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "1.6.4"
+val ktorVersion = "1.6.7"
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktorVersion"
 
 dependencies {
